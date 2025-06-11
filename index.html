@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minesweeper</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+  <header>
+    <h1>Minesweeper</h1>
+  </header>
+
+  <main>
+    <!-- Input para nombre del jugador -->
+    <div id="inicio-juego">
+      <label for="nombre-jugador">Nombre del jugador:</label>
+      <input type="text" id="nombre-jugador" name="nombre-jugador" minlength="3" required>
+      <button id="boton-iniciar">Iniciar partida</button>
+    </div>
+
+    <!-- Contadores -->
+    <div id="panel-info">
+      <div id="contador-minas">Minas: 10</div>
+      <div id="temporizador">Tiempo: 0</div>
+      <button id="boton-reiniciar">
+        <img src="img/cara-feliz.png" alt="Reiniciar" id="cara-juego">
+      </button>
+    </div>
+
+    <!-- Tablero dinámico -->
+    <div id="tablero" class="tablero"></div>
+
+    <!-- Link a GitHub -->
+    <footer>
+    <a href="https://github.com/usuario/repositorio-minesweeper" target="_blank">Repositorio en GitHub</a> |
+    <a href="contacto.html" target="_blank">Contacto</a>
+    </footer>
+  </main>
+
+  <!-- Modal de victoria/derrota -->
+  <div id="modal-resultado" class="modal oculto">
+    <div class="modal-contenido">
+      <p id="mensaje-resultado"></p>
+      <button id="boton-cerrar-modal">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Modal de ranking (opcional) -->
+  <div id="modal-ranking" class="modal oculto">
+    <div class="modal-contenido">
+      <h2>Ranking</h2>
+      <div id="lista-ranking"></div>
+      <button id="boton-cerrar-ranking">Cerrar</button>
+    </div>
+  </div>
+
+  <button id="boton-ver-ranking">Ver Ranking</button>
+
+  <!-- Scripts JS -->
+  <script src="js/modal.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/eventos.js"></script>
+</body>
+</html>

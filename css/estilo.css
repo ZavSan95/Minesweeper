@@ -1,0 +1,128 @@
+/* estilo.css */
+
+/* Estructura general */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #333;
+  min-height: 100vh;
+}
+
+header {
+  margin: 1rem 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#inicio-juego {
+  margin-bottom: 1rem;
+}
+
+#inicio-juego input {
+  margin-left: 0.5rem;
+}
+
+#panel-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+#boton-reiniciar img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+#tablero {
+  display: flex;
+  flex-wrap: wrap;
+  width: 324px; /* 8x8 celdas de 40px */
+  height: 324px;
+  border: 2px solid #333;
+  background-color: #ccc;
+}
+
+/* Estilo de las celdas */
+.celda {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px; 
+  border: 1px solid #999;
+  background-color: #bbb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.celda.revelada {
+  background-color: #e0e0e0;
+  border: 1px solid #999;
+  cursor: default;
+}
+
+.celda.bandera {
+  background-image: url('../img/bandera.png');
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.celda.mina {
+  background-image: url('../img/mina.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Modal genérico */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-contenido {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Oculto (modal cerrado) */
+.oculto {
+  display: none;
+}
+
+/* Footer */
+footer {
+  margin-top: 1rem;
+}
+
+/* Modo oscuro (opcional) */
+body.modo-oscuro {
+  background-color: #222;
+  color: #ddd;
+}
+
+body.modo-oscuro #tablero {
+  background-color: #444;
+}
+
+body.modo-oscuro .celda.revelada {
+  background-color: #666;
+}
