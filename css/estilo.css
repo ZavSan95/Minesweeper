@@ -351,4 +351,15 @@ a:hover {
   display: none;
 }
 
+#inicio-juego input[type="text"] {
+  font-family: monospace;
+  font-size: 1rem;
+  padding: 4px 6px;
+  background-color: var(--gris-claro);
+  color: var(--color-texto);
+  border: 2px inset var(--gris-oscuro);
+  box-sizing: border-box;
+  width: 200px;
+}
+
 
