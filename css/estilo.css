@@ -1,15 +1,48 @@
-/* estilo.css */
+/* Estilo tipo Windows 98/XP clásico */
+:root {
+  --gris-claro: #c0c0c0;
+  --gris-oscuro: #808080;
+  --gris-fondo: #e0e0e0;
+  --gris-celda: #d0d0d0;
+  --borde-claro: #ffffff;
+  --borde-oscuro: #404040;
+  --borde-intermedio: #a0a0a0;
+  --rojo-led: #ff0000;
+}
 
-/* Estructura general */
+body.modo-oscuro {
+  --color-fondo: #1c1c1c;
+  --color-texto: #e0e0e0;
+  --gris-claro: #2b2b2b;
+  --gris-oscuro: #444;
+  --gris-fondo: #1a1a1a;
+  --gris-celda: #2d2d2d;
+  --borde-claro: #555;
+  --borde-oscuro: #000;
+  --borde-intermedio: #333;
+  --rojo-led: #ff5555;
+}
+
+/* Tipografía digital para temporizador (puedes usar una webfont más adelante) */
+@font-face {
+  font-family: 'Digital';
+  src: local('DS-Digital'), url('https://fonts.cdnfonts.com/s/69408/DS-DIGI.TTF') format('truetype');
+}
+
+/* Reset y cuerpo */
 body {
+  margin: 0;
+  padding: 1rem;
+  background-color: var(--gris-claro);
+  font-family: monospace;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #333;
-  min-height: 100vh;
+  color: #000;
 }
 
-header {
+/* Encabezado y contenedor principal */
+header, footer {
   margin: 1rem 0;
 }
 
@@ -17,8 +50,13 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--gris-fondo);
+  padding: 1rem;
+  border: 3px solid var(--gris-oscuro);
+  box-shadow: inset -2px -2px 0 var(--borde-claro), inset 2px 2px 0 var(--borde-oscuro);
 }
 
+/* Inicio de juego */
 #inicio-juego {
   margin-bottom: 1rem;
 }
@@ -27,45 +65,77 @@ main {
   margin-left: 0.5rem;
 }
 
+/* Panel de información */
 #panel-info {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 324px;
+  padding: 0.5rem;
+  background-color: var(--gris-claro);
+  border: 2px solid var(--borde-intermedio);
+  box-shadow: inset -2px -2px 0 var(--borde-claro), inset 2px 2px 0 var(--borde-oscuro);
 }
 
-#boton-reiniciar img {
-  width: 30px;
-  height: 30px;
+/* Temporizador y contador de minas */
+.panel-marcador {
+  font-family: 'Digital', monospace;
+  background-color: black;
+  color: var(--rojo-led);
+  padding: 5px 10px;
+  font-size: 1.5rem;
+  border: 2px inset var(--gris-oscuro);
+}
+
+/* Botón de reinicio tipo 3D */
+#boton-reiniciar {
+  border: 2px outset var(--gris-oscuro);
+  background-color: var(--gris-claro);
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 
+#boton-reiniciar img {
+  width: 26px;
+  height: 26px;
+}
+
+/* Tablero */
 #tablero {
   display: flex;
   flex-wrap: wrap;
-  width: 324px; /* 8x8 celdas de 40px */
-  height: 324px;
-  border: 2px solid #333;
-  background-color: #ccc;
+  width: 326px; /* 8x8 celdas de 40px */
+  height: 326px;
+  margin-top: 10px;
+  background-color: var(--gris-intermedio);
+  border: 3px solid var(--gris-oscuro);
+  box-shadow: inset -2px -2px 0 var(--borde-claro), inset 2px 2px 0 var(--borde-oscuro);
 }
 
-/* Estilo de las celdas */
+/* Celdas */
 .celda {
   width: 40px;
   height: 40px;
-  flex: 0 0 40px; 
-  border: 1px solid #999;
-  background-color: #bbb;
+  flex: 0 0 40px;
+  background-color: var(--gris-celda);
+  border: 1px solid var(--borde-intermedio);
+  box-shadow: -1px -1px 0 var(--borde-claro), 1px 1px 0 var(--borde-oscuro);
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
   cursor: pointer;
   user-select: none;
 }
 
 .celda.revelada {
-  background-color: #e0e0e0;
-  border: 1px solid #999;
+  background-color: var(--gris-fondo);
+  border: 1px solid var(--gris-oscuro);
+  box-shadow: none;
   cursor: default;
 }
 
@@ -78,12 +148,12 @@ main {
 
 .celda.mina {
   background-image: url('../img/mina.jpg');
-  background-size: contain;
+  background-size: 24px 24px;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-/* Modal genérico */
+/* Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -94,35 +164,177 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 
 .modal-contenido {
-  background-color: #fff;
-  padding: 1rem;
+  background-color: var(--gris-claro);
+  color: #000;
+  padding: 1rem 2rem;
+  border: 2px solid var(--gris-oscuro);
+  box-shadow: inset -2px -2px 0 var(--borde-claro), inset 2px 2px 0 var(--borde-oscuro);
   border-radius: 5px;
   text-align: center;
 }
 
-/* Oculto (modal cerrado) */
+/* Oculto */
 .oculto {
   display: none;
 }
 
-/* Footer */
-footer {
+/* ======== BOTONES ESTILO WINDOWS 98 ======== */
+button {
+  font-family: monospace;
+  font-size: 1rem;
+  background-color: var(--gris-claro);
+  color: #000;
+  padding: 4px 12px;
+  margin: 0.3rem;
+  border: 2px outset var(--gris-oscuro);
+  box-shadow: none;
+  cursor: pointer;
+  text-align: center;
+  min-width: 100px;
+}
+
+button:hover {
+  background-color: #dcdcdc;
+}
+
+button:active {
+  border: 2px inset var(--gris-oscuro);
+  background-color: #c8c8c8;
+}
+
+button:disabled {
+  color: #999;
+  border: 2px inset var(--borde-intermedio);
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+/* Botón reiniciar personalizado */
+#boton-reiniciar {
+  border: 2px outset var(--gris-oscuro);
+  background-color: var(--gris-claro);
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+
+#boton-reiniciar:active {
+  border: 2px inset var(--gris-oscuro);
+}
+
+/* ======== ENLACES ESTILO CLÁSICO ======== */
+a {
+  color: #0000ee;
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+a:hover {
+  color: #551a8b;
+  text-decoration: underline;
+}
+
+/* ======== BOTÓN FUERA DE CONTEXTO (Ver ranking, centrado) ======== */
+#boton-ver-ranking {
   margin-top: 1rem;
 }
 
-/* Modo oscuro (opcional) */
-body.modo-oscuro {
-  background-color: #222;
-  color: #ddd;
+/* ======== MODAL BOTONES ======== */
+.modal-contenido button {
+  margin-top: 1rem;
 }
 
-body.modo-oscuro #tablero {
-  background-color: #444;
+/* ===========================
+   RANKING
+=========================== */
+#modal-ranking .modal-contenido {
+  width: 300px;
+  background-color: var(--gris-claro);
+  padding: 1rem;
+  border: 2px solid var(--gris-oscuro);
+  box-shadow: inset -2px -2px 0 var(--borde-claro), inset 2px 2px 0 var(--borde-oscuro);
 }
 
-body.modo-oscuro .celda.revelada {
-  background-color: #666;
+#modal-ranking h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  text-align: center;
 }
+
+/* Lista de ranking */
+#lista-ranking {
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: var(--gris-fondo);
+  border: 2px inset var(--gris-oscuro);
+  padding: 0.5rem;
+  font-family: monospace;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Ítems del ranking (agregados desde JS) */
+.item-ranking {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dotted #999;
+  padding: 2px 0;
+}
+
+/* Scroll clásico */
+#lista-ranking::-webkit-scrollbar {
+  width: 10px;
+}
+#lista-ranking::-webkit-scrollbar-track {
+  background: var(--gris-fondo);
+}
+#lista-ranking::-webkit-scrollbar-thumb {
+  background-color: var(--gris-oscuro);
+  border: 1px solid var(--borde-claro);
+}
+
+.item-ranking {
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  border-bottom: 1px dotted #999;
+}
+
+.item-ranking strong {
+  margin-right: 0.3rem;
+}
+
+.item-ranking .fecha-ranking {
+  font-size: 0.75rem;
+  color: #555;
+  margin-top: 2px;
+}
+
+/* Estilo para los primeros puestos */
+.puesto-1 {
+  background-color: gold;
+  color: #000;
+  font-weight: bold;
+}
+
+.puesto-2 {
+  background-color: silver;
+  color: #000;
+  font-weight: bold;
+}
+
+.puesto-3 {
+  background-color: #cd7f32; /* bronce */
+  color: #000;
+  font-weight: bold;
+}
+
+

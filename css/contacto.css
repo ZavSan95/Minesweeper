@@ -1,0 +1,61 @@
+/* ===========================
+   FORMULARIO DE CONTACTO
+=========================== */
+#formulario-contacto {
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem auto;
+  background-color: var(--gris-fondo);
+  padding: 1rem;
+  border: 2px solid var(--gris-oscuro);
+  box-shadow: inset -2px -2px 0 var(--borde-claro), inset 2px 2px 0 var(--borde-oscuro);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Etiquetas */
+#formulario-contacto label {
+  font-weight: bold;
+  color: var(--color-texto);
+}
+
+/* Inputs y textarea estilo Windows clásico */
+#formulario-contacto input,
+#formulario-contacto textarea {
+  font-family: sans-serif;
+  font-size: 1rem;
+  padding: 4px 6px;
+  background-color: var(--gris-claro);
+  color: var(--color-texto);
+  border: 2px inset var(--gris-oscuro);
+  box-sizing: border-box;
+  width: 100%;
+  resize: vertical;
+}
+
+/* Botón Enviar (ya está definido, pero lo reafirmamos para contexto) */
+#formulario-contacto button {
+  align-self: flex-start;
+  font-weight: bold;
+}
+
+/* ===========================
+   FORMULARIO EN MODO OSCURO
+=========================== */
+body.modo-oscuro #formulario-contacto {
+  background-color: var(--gris-celda);
+  border-color: var(--gris-oscuro);
+  box-shadow: inset -2px -2px 0 var(--borde-claro), inset 2px 2px 0 var(--borde-oscuro);
+}
+
+body.modo-oscuro #formulario-contacto label {
+  color: var(--color-texto);
+}
+
+body.modo-oscuro #formulario-contacto input,
+body.modo-oscuro #formulario-contacto textarea {
+  background-color: #2a2a2a;
+  color: #ddd;
+  border: 2px inset var(--borde-intermedio);
+}

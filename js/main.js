@@ -217,7 +217,7 @@ function obtenerCeldaHTML(fila, columna) {
 =========================== */
 function reiniciarJuego() {
   var caraJuego = document.getElementById('cara-juego');
-  caraJuego.src = 'img/cara-feliz.png';
+  caraJuego.src = 'img/cara-gano.png';
   inicializarJuego();
 }
 
@@ -297,54 +297,31 @@ function revelarTodasLasMinas() {
 }
 
 /* ===========================
-   Guardar resultado en ranking
+  Modo Oscuro
 =========================== */
-function guardarResultado(nombre, gano) {
-  var fechaHora = new Date().toLocaleString();
-  var puntaje = gano ? 100 : 0; // Por ejemplo, 100 si ganó, 0 si perdió (podés ajustar)
-  var duracion = tiempo; // Usamos la variable tiempo global
+document.getElementById("boton-modo-oscuro").addEventListener("click", function () {
+  document.body.classList.toggle("modo-oscuro");
 
-  var resultado = {
-    nombre: nombre,
-    puntaje: puntaje,
-    fecha: fechaHora,
-    duracion: duracion
-  };
+  if(document.body.classList.contains('modo-oscuro')){
+    this.textContent = '🌞 Modo Claro';
+  } else{
+    this.textContent = '🌙 Modo oscuro';
+  }
 
-  // Obtener ranking actual
-  var ranking = JSON.parse(localStorage.getItem('ranking')) || [];
-  ranking.push(resultado);
 
-  // Guardar ranking actualizado
-  localStorage.setItem('ranking', JSON.stringify(ranking));
-}
+  // Opcional: guardar preferencia
+  localStorage.setItem("modoOscuro", document.body.classList.contains("modo-oscuro"));
+});
 
-/* ===========================
-   Mostrar ranking en el modal
-=========================== */
-function mostrarRanking() {
-  var lista = document.getElementById('lista-ranking');
-  lista.innerHTML = '';
+// Cargar modo oscuro automáticamente si está guardado
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("modoOscuro") === "true") {
+    document.body.classList.add("modo-oscuro");
+  }
+});
 
-  var ranking = JSON.parse(localStorage.getItem('ranking')) || [];
 
-  // Ordenar por puntaje descendente
-  ranking.sort(function (a, b) {
-    return b.puntaje - a.puntaje;
-  });
 
-  // Generar HTML
-  ranking.forEach(function (registro) {
-    var item = document.createElement('div');
-    item.textContent = 'Jugador: ' + registro.nombre +
-                        ' | Puntaje: ' + registro.puntaje +
-                        ' | Fecha: ' + registro.fecha +
-                        ' | Duración: ' + registro.duracion + 's';
-    lista.appendChild(item);
-  });
-
-  document.getElementById('modal-ranking').classList.remove('oculto');
-}
 
 
 

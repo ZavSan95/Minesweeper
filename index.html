@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minesweeper</title>
+  <title>Buscaminas</title>
+  <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/modo-oscuro.css">
 </head>
 <body>
 
   <header>
-    <h1>Minesweeper</h1>
+    <h1>Buscaminas</h1>
   </header>
 
   <main>
@@ -26,7 +28,7 @@
       <div id="contador-minas">Minas: 10</div>
       <div id="temporizador">Tiempo: 0</div>
       <button id="boton-reiniciar">
-        <img src="img/cara-feliz.png" alt="Reiniciar" id="cara-juego">
+        <img src="img/cara-gano.png" alt="Reiniciar" id="cara-juego">
       </button>
     </div>
 
@@ -35,7 +37,7 @@
 
     <!-- Link a GitHub -->
     <footer>
-    <a href="https://github.com/usuario/repositorio-minesweeper" target="_blank">Repositorio en GitHub</a> |
+    <a href="https://github.com/ZavSan95/Minesweeper" target="_blank">Repositorio en GitHub</a> |
     <a href="contacto.html" target="_blank">Contacto</a>
     </footer>
   </main>
@@ -58,10 +60,12 @@
   </div>
 
   <button id="boton-ver-ranking">Ver Ranking</button>
+  <button id="boton-modo-oscuro">🌙 Modo oscuro</button>
 
   <!-- Scripts JS -->
   <script src="js/modal.js"></script>
   <script src="js/main.js"></script>
   <script src="js/eventos.js"></script>
+  <script src="js/ranking.js"></script>
 </body>
 </html>

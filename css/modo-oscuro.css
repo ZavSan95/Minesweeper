@@ -1,0 +1,65 @@
+body.modo-oscuro {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+/* Panel */
+body.modo-oscuro main {
+  background-color: var(--gris-fondo);
+  border-color: var(--borde-oscuro);
+  box-shadow: inset -2px -2px 0 var(--borde-claro), inset 2px 2px 0 var(--borde-oscuro);
+}
+
+/* Botones */
+body.modo-oscuro button {
+  background-color: var(--gris-claro);
+  color: var(--color-texto);
+  border: 2px outset var(--gris-oscuro);
+}
+
+body.modo-oscuro button:active {
+  border: 2px inset var(--gris-oscuro);
+  background-color: #222;
+}
+
+/* Celdas */
+body.modo-oscuro .celda {
+  background-color: var(--gris-celda);
+  border: 1px solid var(--borde-intermedio);
+  box-shadow: -1px -1px 0 var(--borde-claro), 1px 1px 0 var(--borde-oscuro);
+}
+
+body.modo-oscuro .celda.revelada {
+  background-color: #444;
+  border: 1px solid var(--borde-oscuro);
+  box-shadow: none;
+}
+
+/* Modal */
+body.modo-oscuro .modal-contenido {
+  background-color: var(--gris-claro);
+  color: var(--color-texto);
+  border-color: var(--gris-oscuro);
+}
+
+/* Ranking top 3 en oscuro */
+body.modo-oscuro .puesto-1 {
+  background-color: #998c00;
+  color: #fff;
+}
+body.modo-oscuro .puesto-2 {
+  background-color: #777;
+  color: #fff;
+}
+body.modo-oscuro .puesto-3 {
+  background-color: #804000;
+  color: #fff;
+}
+
+/* Enlaces */
+body.modo-oscuro a {
+  color: #4ea3ff;
+}
+body.modo-oscuro a:hover {
+  color: #84c5ff;
+}

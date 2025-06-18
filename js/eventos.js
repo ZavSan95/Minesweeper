@@ -83,8 +83,5 @@ function manejarClickDerecho(evento) {
   }
 }
 
-/* ===========================
-   Ver Ranking
-=========================== */
-document.getElementById('boton-ver-ranking').addEventListener('click', mostrarRanking);
+
 
