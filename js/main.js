@@ -271,6 +271,7 @@ function terminarJuego(gano) {
     sonidoVictoria.play();
     caraJuego.src = 'img/cara-gano.png';
     mostrarModal('¡Ganaste la partida!');
+    lanzarFuegos();
   } else {
     sonidoDerrota.play();  // 🔊 Sonido de derrota
     caraJuego.src = 'img/cara-perdio.png';
