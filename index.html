@@ -6,6 +6,7 @@
   <title>Buscaminas</title>
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/estilo.css">
   <link rel="stylesheet" href="css/modo-oscuro.css">
 </head>
@@ -16,12 +17,27 @@
   </header>
 
   <main>
+    
     <!-- Input para nombre del jugador -->
     <div id="inicio-juego">
-      <label for="nombre-jugador">Nombre del jugador:</label>
-      <input type="text" id="nombre-jugador" name="nombre-jugador" minlength="3" required>
+      <div class="campo-inicio">
+        <label for="nombre-jugador">Nombre del jugador:</label>
+        <input type="text" id="nombre-jugador" name="nombre-jugador" minlength="3" required>
+      </div>
+
+      <div class="campo-inicio">
+        <label for="nivel-dificultad">Nivel de dificultad:</label>
+        <select id="nivel-dificultad" class="select-retro">
+          <option value="facil">Fácil</option>
+          <option value="medio">Medio</option>
+          <option value="dificil">Difícil</option>
+        </select>
+      </div>
+
       <button id="boton-iniciar">Iniciar partida</button>
     </div>
+
+
 
     <!-- Contadores -->
     <div id="panel-info">
@@ -33,7 +49,9 @@
     </div>
 
     <!-- Tablero dinámico -->
-    <div id="tablero" class="tablero"></div>
+    <div id="contenedor-tablero">
+      <div id="tablero"></div>
+    </div>
 
     <!-- Link a GitHub -->
     <footer>
@@ -54,6 +72,18 @@
   <div id="modal-ranking" class="modal oculto">
     <div class="modal-contenido">
       <h2>Ranking</h2>
+      <div id="controles-ranking">
+        <select id="orden-ranking">
+          <option value="puntaje">Ordenar por Puntaje</option>
+          <option value="nombre">Ordenar por Nombre</option>
+          <option value="fecha">Ordenar por Fecha</option>
+        </select>
+
+        <select id="direccion-ranking">
+          <option value="desc">Descendente</option>
+          <option value="asc">Ascendente</option>
+        </select>
+      </div>
       <div id="lista-ranking"></div>
       <button id="boton-cerrar-ranking">Cerrar</button>
     </div>

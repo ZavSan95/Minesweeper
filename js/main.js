@@ -15,26 +15,29 @@ var sonidoMina = new Audio('sounds/explosion.mp3');    // Cuando explota la mina
 var sonidoVictoria = new Audio('sounds/victory.mp3');  // Cuando gana
 var sonidoDerrota = new Audio('sounds/defeat.mp3');    // Cuando pierde
 var sonidoBandera = new Audio('sounds/flag.mp3');// Cuando coloca o quita bandera
+var anchoTablero = 0;
+var altoTablero = 0;
 
 
 /* ===========================
    Inicializar el juego
 =========================== */
 function inicializarJuego() {
+  aplicarDificultad();
+
   tablero = [];
   juegoActivo = true;
   tiempo = 0;
   minasRestantes = minasTotales;
 
   // Reiniciar tablero visual
-  var tableroHTML = document.getElementById('tablero');
+  const tableroHTML = document.getElementById('tablero');
   tableroHTML.innerHTML = '';
 
   // Crear la matriz del tablero
-  var i, j;
-  for (i = 0; i < filas; i++) {
+  for (let i = 0; i < filas; i++) {
     tablero[i] = [];
-    for (j = 0; j < columnas; j++) {
+    for (let j = 0; j < columnas; j++) {
       tablero[i][j] = {
         mina: false,
         revelada: false,
@@ -44,25 +47,21 @@ function inicializarJuego() {
     }
   }
 
-  // Colocar minas aleatoriamente
   colocarMinasAleatorias();
 
-  // Contar minas vecinas para cada celda
-  for (i = 0; i < filas; i++) {
-    for (j = 0; j < columnas; j++) {
+  for (let i = 0; i < filas; i++) {
+    for (let j = 0; j < columnas; j++) {
       tablero[i][j].minasVecinas = contarMinasVecinas(i, j);
     }
   }
 
-  // Crear el HTML dinámico del tablero
-  crearTableroHTML();
+  // Usar las medidas calculadas
+  crearTableroHTML(anchoTablero, altoTablero);
 
-  // Actualizar contador minas
   actualizarContadorMinas();
-
-  // Resetear temporizador visual
   document.getElementById('temporizador').innerHTML = 'Tiempo: 0';
 }
+
 
 /* ===========================
    Colocar minas aleatorias
@@ -101,22 +100,27 @@ function contarMinasVecinas(fila, columna) {
 /* ===========================
    Crear tablero en HTML
 =========================== */
-function crearTableroHTML() {
 
-  var tableroHTML = document.getElementById('tablero');
+function crearTableroHTML(ancho, alto) {
+  const tableroHTML = document.getElementById('tablero');
+  tableroHTML.innerHTML = '';
 
-  var i, j, celda;
-  for (i = 0; i < filas; i++) {
-    for (j = 0; j < columnas; j++) {
-      celda = document.createElement('div');
+  tableroHTML.style.width = typeof ancho === 'number' ? `${ancho}px` : ancho;
+  tableroHTML.style.height = 'auto';
+
+  for (let i = 0; i < filas; i++) {
+    for (let j = 0; j < columnas; j++) {
+      const celda = document.createElement('div');
       celda.className = 'celda';
       celda.setAttribute('data-fila', i);
       celda.setAttribute('data-columna', j);
-
       tableroHTML.appendChild(celda);
     }
   }
 }
+
+
+
 
 /* ===========================
    Actualizar contador minas
@@ -216,8 +220,14 @@ function obtenerCeldaHTML(fila, columna) {
    Reiniciar juego
 =========================== */
 function reiniciarJuego() {
-  var caraJuego = document.getElementById('cara-juego');
-  caraJuego.src = 'img/cara-gano.png';
+  const nombre = document.getElementById('nombre-jugador').value.trim();
+
+  if (!validarNombre(nombre)) {
+    mostrarModal('Por favor ingresá tu nombre (mínimo 3 caracteres) antes de reiniciar el juego.');
+    return;
+  }
+
+  document.getElementById('cara-juego').src = 'img/cara-gano.png';
   inicializarJuego();
 }
 
@@ -321,7 +331,44 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+/* ===========================
+  Aplicar Dificultad
+=========================== */
 
+function aplicarDificultad() {
+  const seleccion = document.getElementById('nivel-dificultad').value;
+
+  switch (seleccion) {
+    case 'facil':
+      filas = 8;
+      columnas = 8;
+      minasTotales = 10;
+      anchoTablero = 325;
+      break;
+    case 'medio':
+      filas = 12;
+      columnas = 12;
+      minasTotales = 25;
+      anchoTablero = 486;
+      break;
+    case 'dificil':
+      filas = 16;
+      columnas = 16;
+      minasTotales = 40;
+      anchoTablero = 646;
+      break;
+  }
+}
+
+
+
+/* ===========================
+  Cargar Tablero Default
+=========================== */
+window.addEventListener('DOMContentLoaded', () => {
+  aplicarDificultad();      
+  inicializarJuego();       
+});
 
 
 

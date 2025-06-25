@@ -30,17 +30,30 @@ function mostrarRanking() {
 
   var ranking = JSON.parse(localStorage.getItem('ranking')) || [];
 
-  // Ordenar por puntaje descendente
+  // Obtener criterios de ordenamiento
+  var criterio = document.getElementById('orden-ranking').value;
+  var direccion = document.getElementById('direccion-ranking').value;
+
+  // Ordenar ranking según criterio y dirección
   ranking.sort(function (a, b) {
-    return b.puntaje - a.puntaje;
+    let resultado = 0;
+
+    if (criterio === 'puntaje') {
+      resultado = a.puntaje - b.puntaje;
+    } else if (criterio === 'nombre') {
+      resultado = a.nombre.localeCompare(b.nombre);
+    } else if (criterio === 'fecha') {
+      resultado = new Date(a.fecha) - new Date(b.fecha);
+    }
+
+    return direccion === 'asc' ? resultado : -resultado;
   });
 
-  // Generar HTML
-    ranking.forEach(function (registro, index) {
+  // Mostrar ranking
+  ranking.forEach(function (registro, index) {
     const item = document.createElement('div');
     item.classList.add('item-ranking');
 
-    // Agregar clase para top 3
     if (index === 0) item.classList.add('puesto-1');
     else if (index === 1) item.classList.add('puesto-2');
     else if (index === 2) item.classList.add('puesto-3');
@@ -52,13 +65,20 @@ function mostrarRanking() {
     `;
 
     lista.appendChild(item);
-    });
-
+  });
 
   document.getElementById('modal-ranking').classList.remove('oculto');
 }
+
+
 
 /* ===========================
    Ver Ranking
 =========================== */
 document.getElementById('boton-ver-ranking').addEventListener('click', mostrarRanking);
+
+/* ===========================
+   Orden Ranking
+=========================== */
+document.getElementById('orden-ranking').addEventListener('change', mostrarRanking);
+document.getElementById('direccion-ranking').addEventListener('change', mostrarRanking);

@@ -83,5 +83,16 @@ function manejarClickDerecho(evento) {
   }
 }
 
+/* ===========================
+   Reiniciar Dificultad
+=========================== */
+document.getElementById('nivel-dificultad').addEventListener('change', function () {
+  if (juegoActivo) {
+    reiniciarJuego();
+  } else {
+    inicializarJuego();
+  }
+});
+
 
 
