@@ -343,7 +343,7 @@ function aplicarDificultad() {
       filas = 8;
       columnas = 8;
       minasTotales = 10;
-      anchoTablero = 325;
+      anchoTablero = 326;
       break;
     case 'medio':
       filas = 12;
