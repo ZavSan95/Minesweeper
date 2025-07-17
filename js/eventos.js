@@ -40,19 +40,21 @@ function validarNombre(nombre) {
 =========================== */
 function manejarClickIzquierdo(evento) {
   if (!juegoActivo) {
+    mostrarModal('Debes iniciar la partida primero.');
     return;
   }
 
-  var celda = evento.target;
+  const celda = evento.target;
   if (celda.classList.contains('celda')) {
-    var fila = parseInt(celda.getAttribute('data-fila'), 10);
-    var columna = parseInt(celda.getAttribute('data-columna'), 10);
+    const fila = parseInt(celda.getAttribute('data-fila'), 10);
+    const columna = parseInt(celda.getAttribute('data-columna'), 10);
 
     if (!tablero[fila][columna].revelada && !tablero[fila][columna].bandera) {
       revelarCelda(fila, columna);
     }
   }
 }
+
 
 /* ===========================
    Manejar clic derecho
@@ -61,38 +63,68 @@ function manejarClickDerecho(evento) {
   evento.preventDefault();
 
   if (!juegoActivo) {
+    mostrarModal('Debes iniciar la partida primero.');
     return;
   }
 
-  var celda = evento.target;
+  const celda = evento.target;
   if (celda.classList.contains('celda')) {
-    var fila = parseInt(celda.getAttribute('data-fila'), 10);
-    var columna = parseInt(celda.getAttribute('data-columna'), 10);
+    const fila = parseInt(celda.getAttribute('data-fila'), 10);
+    const columna = parseInt(celda.getAttribute('data-columna'), 10);
 
     if (!tablero[fila][columna].revelada) {
-    if (tablero[fila][columna].bandera) {
+      if (tablero[fila][columna].bandera) {
         tablero[fila][columna].bandera = false;
         celda.classList.remove('bandera');
-    } else {
+      } else {
         tablero[fila][columna].bandera = true;
         celda.classList.add('bandera');
-        sonidoBandera.play();  // 🔊 Sonido de bandera
-    }
-    actualizarContadorMinas();
+        sonidoBandera.play();
+      }
+      actualizarContadorMinas();
     }
   }
 }
+
+/* ===========================
+   Inicializar tablero vacío
+=========================== */
+function inicializarTableroVacio() {
+  tablero = [];
+  for (let i = 0; i < filas; i++) {
+    tablero[i] = [];
+    for (let j = 0; j < columnas; j++) {
+      tablero[i][j] = {
+        mina: false,
+        revelada: false,
+        bandera: false,
+        minasVecinas: 0
+      };
+    }
+  }
+}
+
+
 
 /* ===========================
    Reiniciar Dificultad
 =========================== */
 document.getElementById('nivel-dificultad').addEventListener('change', function () {
   if (juegoActivo) {
-    reiniciarJuego();
-  } else {
-    inicializarJuego();
+    mostrarModal('No podés cambiar la dificultad durante una partida.');
+    // Revertir al valor anterior
+    this.value = dificultadActual;
+    return;
   }
+
+  aplicarDificultad();
+  minasRestantes = minasTotales;
+  inicializarTableroVacio();
+  crearTableroHTML();
+  actualizarContadorMinas();
+  document.getElementById('temporizador').innerHTML = 'Tiempo: 0';
 });
+
 
 
 

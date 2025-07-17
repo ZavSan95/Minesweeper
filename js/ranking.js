@@ -1,3 +1,5 @@
+'use strict';
+
 /* ===========================
    Guardar resultado en ranking
 =========================== */

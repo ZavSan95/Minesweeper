@@ -17,6 +17,7 @@ var sonidoDerrota = new Audio('sounds/defeat.mp3');    // Cuando pierde
 var sonidoBandera = new Audio('sounds/flag.mp3');// Cuando coloca o quita bandera
 var anchoTablero = 0;
 var altoTablero = 0;
+var dificultadActual = 'facil';
 
 
 /* ===========================
@@ -99,14 +100,20 @@ function contarMinasVecinas(fila, columna) {
 
 /* ===========================
    Crear tablero en HTML
-=========================== */
+=========================== */  
 
-function crearTableroHTML(ancho, alto) {
+function crearTableroHTML() {
   const tableroHTML = document.getElementById('tablero');
   tableroHTML.innerHTML = '';
 
-  tableroHTML.style.width = typeof ancho === 'number' ? `${ancho}px` : ancho;
-  tableroHTML.style.height = 'auto';
+  // Limpiar clases de nivel previas
+  tableroHTML.classList.remove('nivel-facil', 'nivel-medio', 'nivel-dificil');
+
+  // Asignar clase según dificultad
+  const seleccion = document.getElementById('nivel-dificultad').value;
+  tableroHTML.classList.add('nivel-' + seleccion);
+
+  tableroHTML.style.width = '100%'; // ya no necesario si se maneja por CSS, pero opcional
 
   for (let i = 0; i < filas; i++) {
     for (let j = 0; j < columnas; j++) {
@@ -118,6 +125,8 @@ function crearTableroHTML(ancho, alto) {
     }
   }
 }
+
+
 
 
 
@@ -144,6 +153,8 @@ function contarBanderas() {
   }
   return total;
 }
+
+
 
 /* ===========================
    Revelar celda
@@ -223,6 +234,7 @@ function reiniciarJuego() {
   const nombre = document.getElementById('nombre-jugador').value.trim();
 
   if (!validarNombre(nombre)) {
+    document.getElementById('nivel-dificultad').value = 'facil'; 
     mostrarModal('Por favor ingresá tu nombre (mínimo 3 caracteres) antes de reiniciar el juego.');
     return;
   }
@@ -336,26 +348,23 @@ window.addEventListener("DOMContentLoaded", () => {
 =========================== */
 
 function aplicarDificultad() {
-  const seleccion = document.getElementById('nivel-dificultad').value;
+  dificultadActual = document.getElementById('nivel-dificultad').value;
 
-  switch (seleccion) {
+  switch (dificultadActual) {
     case 'facil':
       filas = 8;
       columnas = 8;
       minasTotales = 10;
-      anchoTablero = 326;
       break;
     case 'medio':
       filas = 12;
       columnas = 12;
       minasTotales = 25;
-      anchoTablero = 486;
       break;
     case 'dificil':
       filas = 16;
       columnas = 16;
       minasTotales = 40;
-      anchoTablero = 646;
       break;
   }
 }
@@ -366,9 +375,28 @@ function aplicarDificultad() {
   Cargar Tablero Default
 =========================== */
 window.addEventListener('DOMContentLoaded', () => {
-  aplicarDificultad();      
-  inicializarJuego();       
+  aplicarDificultad(); 
+  
+  // Inicializar estructura del tablero para evitar error en contarBanderas
+  tablero = [];
+  for (let i = 0; i < filas; i++) {
+    tablero[i] = [];
+    for (let j = 0; j < columnas; j++) {
+      tablero[i][j] = {
+        mina: false,
+        revelada: false,
+        bandera: false,
+        minasVecinas: 0
+      };
+    }
+  }
+
+  crearTableroHTML(); // solo visual, sin activar minas ni juego
+  minasRestantes = minasTotales;
+  actualizarContadorMinas();
+  juegoActivo = false;
 });
+
 
 
 
