@@ -20,7 +20,7 @@ window.addEventListener('load', function () {
     modal.classList.add('oculto');
   });
 
-  // Modal de ranking (opcional)
+  // Modal de ranking 
   var botonCerrarRanking = document.getElementById('boton-cerrar-ranking');
   if (botonCerrarRanking) {
     botonCerrarRanking.addEventListener('click', function () {

@@ -11,10 +11,10 @@ var tablero = [];
 var juegoActivo = false;
 var temporizador = null;
 var tiempo = 0;
-var sonidoMina = new Audio('sounds/explosion.mp3');    // Cuando explota la mina
-var sonidoVictoria = new Audio('sounds/victory.mp3');  // Cuando gana
-var sonidoDerrota = new Audio('sounds/defeat.mp3');    // Cuando pierde
-var sonidoBandera = new Audio('sounds/flag.mp3');// Cuando coloca o quita bandera
+var sonidoMina = new Audio('sounds/explosion.mp3');    
+var sonidoVictoria = new Audio('sounds/victory.mp3');  
+var sonidoDerrota = new Audio('sounds/defeat.mp3');    
+var sonidoBandera = new Audio('sounds/flag.mp3');
 var anchoTablero = 0;
 var altoTablero = 0;
 var dificultadActual = 'facil';
@@ -113,7 +113,7 @@ function crearTableroHTML() {
   const seleccion = document.getElementById('nivel-dificultad').value;
   tableroHTML.classList.add('nivel-' + seleccion);
 
-  tableroHTML.style.width = '100%'; // ya no necesario si se maneja por CSS, pero opcional
+  tableroHTML.style.width = '100%'; 
 
   for (let i = 0; i < filas; i++) {
     for (let j = 0; j < columnas; j++) {
@@ -281,7 +281,7 @@ function terminarJuego(gano) {
   juegoActivo = false;
 
   clearInterval(temporizador);
-  temporizador = null;  // ✅ Resetea la referencia del temporizador
+  temporizador = null;  
 
   var nombreJugador = document.getElementById('nombre-jugador').value;
 

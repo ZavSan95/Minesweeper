@@ -5,8 +5,8 @@
 =========================== */
 function guardarResultado(nombre, gano) {
   var fechaHora = new Date().toLocaleString();
-  var puntaje = gano ? 100 : 0; // Por ejemplo, 100 si ganó, 0 si perdió (podés ajustar)
-  var duracion = tiempo; // Usamos la variable tiempo global
+  var puntaje = gano ? 100 : 0; 
+  var duracion = tiempo; 
 
   var resultado = {
     nombre: nombre,

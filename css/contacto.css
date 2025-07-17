@@ -34,7 +34,7 @@
   resize: vertical;
 }
 
-/* Botón Enviar (ya está definido, pero lo reafirmamos para contexto) */
+/* Botón Enviar  */
 #formulario-contacto button {
   align-self: flex-start;
   font-weight: bold;

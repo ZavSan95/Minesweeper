@@ -52,7 +52,7 @@ function animarFuegos() {
 
 function lanzarFuegos() {
   canvas.classList.remove('oculto');
-  fireworks = []; // 🔁 Reiniciar fuegos previos
+  fireworks = []; 
 
   // Crear fuegos con delay y animar al final
   for (let i = 0; i < 5; i++) {

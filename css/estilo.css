@@ -119,7 +119,7 @@ main {
 /* Tablero */
 #tablero {
   display: grid;
-  gap: 2px; /* espacio entre celdas */
+  gap: 2px; 
   margin-top: 10px;
   background-color: var(--gris-intermedio);
   border: 3px solid var(--gris-oscuro);
@@ -355,7 +355,7 @@ a:hover {
 }
 
 .puesto-3 {
-  background-color: #cd7f32; /* bronce */
+  background-color: #cd7f32; 
   color: #000;
   font-weight: bold;
 }
